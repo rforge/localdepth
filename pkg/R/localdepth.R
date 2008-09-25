@@ -3,8 +3,8 @@
 #	localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 16, 2008
-#	Version: 0.1-5
+#	Date: September, 25, 2008
+#	Version: 0.1-6
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -19,9 +19,12 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
   if (method=='simplicial') {
     if (is.circular(x))
       localdepth.simp.circular(x=x, y=y, tau=tau, use=use)
-    if (type=='exact' & ncol(x) < 3)
-      localdepth.simp(x=x, y=y, tau=tau, use=use)
-    else
+    if (type=='exact') {
+      if (ncol(x) < 3) 
+        localdepth.simp(x=x, y=y, tau=tau, use=use)
+      else
+        localdepth.simp.exact(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
+    } else
       localdepth.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
 ## mahalanobis    
   } else if (method=='mahalanobis') {
