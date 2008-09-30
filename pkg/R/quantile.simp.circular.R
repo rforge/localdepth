@@ -3,10 +3,10 @@
 #	quantile.simp.circular function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 24, 2007
-#	Version: 0.2
+#	Date: September, 30, 2008
+#	Version: 0.2-1
 #
-#	Copyright (C) 2007 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
@@ -21,7 +21,7 @@ quantile.simp.circular <- function(x, probs, all=FALSE) {
                DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$diameters
   res <- quantile.default(diameters, probs)
   if (all) {
-     res <- list(quantile=res, stats=result, call=match.call())
+     res <- list(quantile=res, stats=diameters, call=match.call())
   }
   return(res)
 }
