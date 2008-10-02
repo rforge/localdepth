@@ -3,14 +3,14 @@
 #	localdepth2Dsimplicialsimilarity function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: June, 16, 2008
-#	Version: 0.2
+#	Date: October, 02, 2008
+#	Version: 0.2-1
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth2Dsimplicialsimilarity <- function(x, y, tau, use) {
+localdepth2Dsimplicialsimilarity <- function(x, y, tau, use, weight=NULL) {
   x <- as.matrix(x)
   y <- as.matrix(y)
   nx <- nrow(x)
@@ -50,6 +50,7 @@ localdepth2Dsimplicialsimilarity <- function(x, y, tau, use) {
   }
   res$depth <- matrix(res$depth, nrow=ny, ncol=nt, byrow=FALSE)
   res$localdepth <- matrix(res$localdepth, nrow=ny, ncol=nt, byrow=FALSE)
+  
 #  tetracorica <- function(x, y) {
 #    a <- x%*%y
 #    b <- x%*%(1-y)
@@ -71,8 +72,25 @@ localdepth2Dsimplicialsimilarity <- function(x, y, tau, use) {
 ##  result$d <- apply(res$depth, 1, sum)/nt
 ##  result$ld <- res$localdepth
 ##  result$d <- res$depth
-  res$depth <- res$depth%*%t(res$depth)
-  res$localdepth <- res$localdepth%*%t(res$localdepth)
+  if (!is.null(weight)) {
+    result <- rep(0, nt)
+    if (use=='diameter') {
+      vol <- .C("twoDdiam", x = as.double(x[,1]), y = as.double(x[,2]),
+               nx = as.integer(nx), result = as.double(result),
+               DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$result
+    } else {
+      vol <- .C("twoDarea", x = as.double(x[,1]), y = as.double(x[,2]),
+               nx = as.integer(nx), result = as.double(result),
+               DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$result
+    }
+    W <- diag(weight(vol))
+    res$depth <- res$depth%*%W%*%t(res$depth)
+    res$localdepth <- res$localdepth%*%W%*%t(res$localdepth)
+  } else {
+    res$depth <- res$depth%*%t(res$depth)
+    res$localdepth <- res$localdepth%*%t(res$localdepth)
+  }
+
   result$localdepth <- res$localdepth
   result$depth <- res$depth
   result$call <- match.call()

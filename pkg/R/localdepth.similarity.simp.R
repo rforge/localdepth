@@ -3,14 +3,14 @@
 #	localdepth.similarity.simp function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 8, 2008
-#	Version: 0.1-1
+#	Date: October, 02, 2008
+#	Version: 0.1-2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter')) {
+localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter', weight=NULL)) {
   use <- match.arg(use)
   if (is.null(y))
     y <- x
@@ -21,7 +21,7 @@ localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter
     if (nx < 3) stop('x must have at least 3 rows')
     if (!(is.matrix(y) | is.data.frame(y))) stop('y must be a matrix or a data.frame')
     if (ncol(y)!=2) stop('y must have 2 columns')
-    result <- localdepth2Dsimplicialsimilarity(x,y,tau,use)
+    result <- localdepth2Dsimplicialsimilarity(x,y,tau,use,weight)
   } else if (is.vector(x)) {
     nx <- length(x)
     if (nx < 2) stop('x must have at least length 2')

@@ -10,7 +10,7 @@
 #
 #############################################################
 
-localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9)) {
+localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9), weight=NULL) {
   use <- match.arg(use)
   method <- match.arg(method)
   type <- match.arg(type)
@@ -20,7 +20,7 @@ localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), m
     if (is.circular(x))
       localdepth.similarity.simp.circular(x=x, y=y, tau=tau, use=use)
     if (type=='exact')
-      localdepth.similarity.simp(x=x, y=y, tau=tau, use=use)
+      localdepth.similarity.simp(x=x, y=y, tau=tau, use=use, weight=weight)
     else
       localdepth.similarity.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
 ## mahalanobis    

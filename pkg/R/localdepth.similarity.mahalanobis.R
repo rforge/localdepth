@@ -1,16 +1,16 @@
 #############################################################
 #
-#	localdepth.mahalanobis function
+#	localdepth.similarity.mahalanobis function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 14, 2008
+#	Date: August, 18, 2008
 #	Version: 0.2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth.mahalanobis <- function(x, y=NULL, tau) {
+localdepth.similarity.mahalanobis <- function(x, y=NULL, tau) {
   mahdepth <- function(x, mean, covinv) {
     temp <- (x-mean)
     1/(1+temp%*%covinv%*%temp)
