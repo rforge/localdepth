@@ -3,14 +3,14 @@
 #	localdepth.similarity.mahalanobis function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 18, 2008
+#	Date: October, 02, 2008
 #	Version: 0.2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth.similarity.mahalanobis <- function(x, y=NULL, tau) {
+localdepth.similarity.mahalanobis <- function(x, y=NULL, tau, weight=NULL) {
   mahdepth <- function(x, mean, covinv) {
     temp <- (x-mean)
     1/(1+temp%*%covinv%*%temp)
@@ -46,6 +46,12 @@ localdepth.similarity.mahalanobis <- function(x, y=NULL, tau) {
       simld[i,j] <- simld[j,i] <- sum(vetti <= tau & vettj <= tau)/nx
     }
   }
+
+  if (!is.null(weight)) {
+    mah <- weight(mah)
+    simld <- simld*mah
+  }
+  
   result <- list()
   result$localdepth <- simld
   result$depth <- NA

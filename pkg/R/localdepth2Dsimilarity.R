@@ -77,15 +77,15 @@ localdepth2Dsimplicialsimilarity <- function(x, y, tau, use, weight=NULL) {
     if (use=='diameter') {
       vol <- .C("twoDdiam", x = as.double(x[,1]), y = as.double(x[,2]),
                nx = as.integer(nx), result = as.double(result),
-               DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$result
+               DUP = TRUE, NAOK = FALSE, PACKAGE = "localdepth")$result
     } else {
       vol <- .C("twoDarea", x = as.double(x[,1]), y = as.double(x[,2]),
                nx = as.integer(nx), result = as.double(result),
-               DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$result
+               DUP = TRUE, NAOK = FALSE, PACKAGE = "localdepth")$result
     }
-    W <- diag(weight(vol))
-    res$depth <- res$depth%*%W%*%t(res$depth)
-    res$localdepth <- res$localdepth%*%W%*%t(res$localdepth)
+    vol <- weight(vol)
+    res$depth <- res$depth%*%(t(res$depth)*vol)
+    res$localdepth <- res$localdepth%*%(t(res$localdepth)*vol)
   } else {
     res$depth <- res$depth%*%t(res$depth)
     res$localdepth <- res$localdepth%*%t(res$localdepth)

@@ -3,8 +3,8 @@
 #	localdepth.similarity function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 28, 2008
-#	Version: 0.1
+#	Date: October, 02, 2008
+#	Version: 0.1-1
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -26,7 +26,7 @@ localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), m
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
-      localdepth.similarity.mahalanobis(x=x, y=y, tau=tau, use=use, similarity=FALSE)
+      localdepth.similarity.mahalanobis(x=x, y=y, tau=tau, weight=weight)
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")

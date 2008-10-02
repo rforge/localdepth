@@ -10,7 +10,7 @@
 #
 #############################################################
 
-localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter', weight=NULL)) {
+localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter'), weight=NULL) {
   use <- match.arg(use)
   if (is.null(y))
     y <- x
