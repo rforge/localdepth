@@ -22,7 +22,7 @@ localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), m
     if (type=='exact')
       localdepth.similarity.simp(x=x, y=y, tau=tau, use=use, weight=weight)
     else
-      localdepth.similarity.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
+      localdepth.similarity.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
@@ -30,7 +30,7 @@ localdepth.similarity <- function(x, y=NULL, tau, use=c('volume', 'diameter'), m
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")
-      localdepth.similarity.ellipsoid(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
+      localdepth.similarity.ellipsoid(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
   }
 }
 

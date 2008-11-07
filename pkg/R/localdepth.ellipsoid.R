@@ -3,8 +3,8 @@
 #	localdepth.ellipsoid function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 15, 2008
-#	Version: 0.1
+#	Date: November, 07, 2008
+#	Version: 0.1-1
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -26,7 +26,9 @@ localdepth.ellipsoid <- function(x, y=NULL, tau, use=c('volume', 'diameter'), ns
   if (is.null(dimension))
     dimension <- nc
   nt <- choose(nx, nc+1)
-
+  if (nt > .Machine$integer.max)
+    nt <- .Machine$integer.max
+  
   use <- match.arg(use)
 
   if (is.numeric(nsamp) && nsamp <= 0) stop("the argument 'nsamp' must be positive")

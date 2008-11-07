@@ -3,8 +3,8 @@
 #	localdepth.simp.approx function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 16, 2008
-#	Version: 0.1-5
+#	Date: November, 7, 2008
+#	Version: 0.1-6
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -24,6 +24,8 @@ localdepth.simp.approx <- function(x, y=NULL, tau, use=c('volume', 'diameter'), 
   ny <- nrow(y)
   nc <- ncol(x)
   nt <- choose(nx, nc+1)
+  if (nt > .Machine$integer.max)
+    nt <- .Machine$integer.max
 
   use <- match.arg(use)
 

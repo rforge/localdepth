@@ -3,8 +3,8 @@
 #	localdepth.simp.exact function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 25, 2008
-#	Version: 0.1
+#	Date: November, 07, 2008
+#	Version: 0.1-1
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -24,6 +24,8 @@ localdepth.simp.exact <- function(x, y=NULL, tau, use=c('volume', 'diameter'), n
   ny <- nrow(y)
   nc <- ncol(x)
   nt <- choose(nx, nc+1)
+  if (nt > .Machine$integer.max)
+    nt <- .Machine$integer.max
 
   use <- match.arg(use)
 

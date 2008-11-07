@@ -3,8 +3,8 @@
 #	localdepth.similarity.simp.approx function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 27, 2008
-#	Version: 0.1-2
+#	Date: November, 07, 2008
+#	Version: 0.1-3
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -25,7 +25,8 @@ localdepth.similarity.simp.approx <- function(x, y=NULL, tau, use=c('volume', 'd
   ny <- nrow(y)
   nc <- ncol(x)
   nt <- choose(nx, nc+1)
-
+  if (nt > .Machine$integer.max)
+    nt <- .Machine$integer.max
   use <- match.arg(use)
 
   if (is.numeric(nsamp) && nsamp <= 0) stop("the argument 'nsamp' must be positive")
