@@ -3,8 +3,8 @@
 #	localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 25, 2008
-#	Version: 0.1-6
+#	Date: November, 07, 2008
+#	Version: 0.1-7
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -23,9 +23,9 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
       if (ncol(x) < 3) 
         localdepth.simp(x=x, y=y, tau=tau, use=use)
       else
-        localdepth.simp.exact(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
+        localdepth.simp.exact(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
     } else
-      localdepth.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol)
+      localdepth.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
@@ -33,7 +33,7 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")
-      localdepth.ellipsoid(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=1, tol=tol, dimension=dimension)
+      localdepth.ellipsoid(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol, dimension=dimension)
   }
 }
 
