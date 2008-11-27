@@ -3,8 +3,8 @@
 #	localdepth.ellipsoid function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: November, 07, 2008
-#	Version: 0.1-1
+#	Date: November, 27, 2008
+#	Version: 0.1-2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -67,8 +67,8 @@ localdepth.ellipsoid <- function(x, y=NULL, tau, use=c('volume', 'diameter'), ns
       as.integer(ny),
       as.integer(nuse),
       as.double(tol),
-      depth=double(ny),
-      as.double(dimension),                  
+      as.double(dimension),
+      depth=double(ny),            
       localdepth=double(ny),                  
       nd=double(1),
       nld=double(1),
