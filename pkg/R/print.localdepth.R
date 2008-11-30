@@ -3,8 +3,8 @@
 #	print.localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 2, 2008
-#	Version: 0.1
+#	Date: Novembre, 30, 2008
+#	Version: 0.1-1
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -25,7 +25,7 @@ print.localdepth <- function(x, digits = max(3, getOption("digits") - 3), ...) {
     if (x$nsamp=='all')
       cat("All objects were explored \n")
     else
-      cat("A Monte Carlo approach was used on: ", x$nun[1], " objects in order to have ", x$nun[1] ,"\n")
+      cat("A Monte Carlo approach was used on: ", x$num[1], " objects in order to have ", x$num[2] , "simplicies with size smaller than 'tau'\n")
     cat("\n")
     invisible(x)
 }
