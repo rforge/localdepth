@@ -3,14 +3,14 @@
 #	localdepth.mahalanobis function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: August, 14, 2008
-#	Version: 0.2
+#	Date: December, 3, 2008
+#	Version: 0.3
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth.mahalanobis <- function(x, y=NULL, tau) {
+localdepth.mahalanobis <- function(x, y=NULL, tau, location=NULL, covariance=NULL) {
   mahdepth <- function(x, mean, covinv) {
     temp <- (x-mean)
     1/(1+temp%*%covinv%*%temp)
@@ -27,10 +27,12 @@ localdepth.mahalanobis <- function(x, y=NULL, tau) {
   if (ncol(x) < 2) stop('At least two columns must be supplied')
   nx <- nrow(x)
   ny <- nrow(y)
-  S <- cov(x)
-  media <- as.vector(apply(x, 2, mean))
-  if (abs(det(S)/2) < .Machine$double.eps) stop('The covariance matrix seems to be singular')
-  Sinv <- solve(S)
+  if (is.null(covariance))
+    covariance <- cov(x)
+  if (is.null(location))
+    location <- as.vector(apply(x, 2, mean))
+  if (abs(det(covariance)/2) < .Machine$double.eps) stop('The covariance matrix seems to be singular')
+  Sinv <- solve(covariance)
   mah <- matrix(0,ny,nx);
   for(i in 1:ny) {
     for(j in 1:nx) { 
@@ -41,7 +43,7 @@ localdepth.mahalanobis <- function(x, y=NULL, tau) {
   mahd <- mahld <- rep(0, ny)
   for(i in 1:ny) {
     vetti <- mah[i,]
-    mahd[i] <- mahdepth(y[i,], mean=media, covinv=Sinv)
+    mahd[i] <- mahdepth(y[i,], mean=location, covinv=Sinv)
     mahld[i] <- sum(vetti <= tau)/nx
   }
   result <- list()

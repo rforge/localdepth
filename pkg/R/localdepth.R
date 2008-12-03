@@ -3,14 +3,14 @@
 #	localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: November, 30, 2008
-#	Version: 0.1-8
+#	Date: December, 3, 2008
+#	Version: 0.2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9), dimension=NULL) {
+localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9), dimension=NULL, location=NULL, covariance=NULL) {
   use <- match.arg(use)
   method <- match.arg(method)
   type <- match.arg(type)
@@ -29,7 +29,7 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
-      localdepth.mahalanobis(x=x, y=y, tau=tau)
+      localdepth.mahalanobis(x=x, y=y, tau=tau, location=location, covariance=covariance)
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")

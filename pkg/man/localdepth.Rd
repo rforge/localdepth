@@ -5,7 +5,10 @@
 The function evaluates the depth and the local depth for a given set of points with respect the dataset. 
 }
 \usage{
-localdepth(x, y = NULL, tau, use = c("volume", "diameter"), method = c("simplicial", "ellipsoid", "mahalanobis"), type = c("exact", "approx"), nsamp = "all", nmax = 1, tol=10^(-9), dimension=NULL)
+localdepth(x, y = NULL, tau, use = c("volume", "diameter"), 
+  method = c("simplicial", "ellipsoid", "mahalanobis"), 
+  type = c("exact", "approx"), nsamp = "all", nmax = 1, 
+  tol=10^(-9), dimension=NULL, location=NULL, covariance=NULL)
 }
 
 \arguments{
@@ -19,6 +22,8 @@ localdepth(x, y = NULL, tau, use = c("volume", "diameter"), method = c("simplici
   \item{nmax}{maximum fraction (in the range (0,1]) of objects to consider in case \code{nsamp} is not equal to \code{all}. If \code{1} means the same as the exaustive scanning (\code{choose(NROW(x), NCOL(x)+1)} for Simplicial and Ellipsoid Depth)}
   \item{tol}{it is a tolerance parameter that should be fixed depending the precision of your machine. This is used to ensure that the points on the border of the objects are considered inside it}
   \item{dimension}{this argument is used only when \code{method="ellipsoid"} and it is the square of the dimension of the ellipsoid to use. Defaulf is \code{NCOL(x)}}
+  \item{location}{ TOBEDONE}
+  \item{covariance}{ TOBEDONE}
 }
 \details{
   ~~ If necessary, more details than the description above ~~
