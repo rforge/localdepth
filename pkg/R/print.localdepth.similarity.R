@@ -3,8 +3,8 @@
 #	print.localdepth.similarity function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: December, 1, 2008
-#	Version: 0.1-1
+#	Date: December, 17, 2008
+#	Version: 0.2
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
@@ -24,8 +24,18 @@ print.localdepth.similarity <- function(x, digits = max(3, getOption("digits") -
     cat("Membership evaluation: ", x$type, "\n")
     if (x$nsamp=='all')
       cat("All objects were explored \n")
-    else
-      cat("A Monte Carlo approach was used on: ", x$num[1], " objects in order to have ", x$num[2] , "simplicies with size smaller than 'tau'\n")
-      cat("\n")
+    else {
+      if (x$method!='mahalanobis') {
+        cat("A Monte Carlo approach was used on: ", x$num[1], " objects in order to have ", x$num[2])
+        if (x$method=='simplicial')
+          cat(" simplicies ")
+        else if (x$method=='ellipsoid')
+          cat(" ellipsoids ")
+        cat("with size smaller than 'tau'\n")
+      } else {
+        cat("A Monte Carlo approach was used on: ", x$num[1], " objects\n")
+      }
+    }
+    cat("\n")
     invisible(x)
 }

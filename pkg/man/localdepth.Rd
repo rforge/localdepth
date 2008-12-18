@@ -1,8 +1,8 @@
 \name{localdepth}
 \alias{localdepth}
-\title{Local Depth}
+\title{Local depth}
 \description{
-The function evaluates the depth and the local depth for a given set of points with respect the dataset. 
+The function evaluates the depth and the local depth for a set of points with respect to a dataset. 
 }
 \usage{
 localdepth(x, y = NULL, tau, use = c("volume", "diameter"), 
@@ -12,46 +12,47 @@ localdepth(x, y = NULL, tau, use = c("volume", "diameter"),
 }
 
 \arguments{
-  \item{x}{numeric. Vector, dataframe or matrix. If \code{x} is a \code{\link{circular}} vector than a circular version is used. Avoid ties in this dataset by little perturbation of the data before to use the function. The function only warnings for ties.}
-  \item{y}{a vector, a dataframe or a matrix with the same number of columns as \code{x}, or \code{NULL}. If \code{NULL}, \code{x} is used}
-  \item{tau}{the threshold value for the evaluation of the localdepth. Use function \code{\link{quantile.localdepth}} in order to fix \code{tau} using a quantile order of the dimension of the objects (depending of the method simplex, ellipsoid, etc.)}
-  \item{use}{the statistic used to measure the size of the objects, so far the volume and the diameter are available}
-  \item{method}{the type of (Local) Depth you want to evaluate}
-  \item{type}{how to performance the evaluation of the membership. The \code{type="approx"} is available only for the \code{method="simplicial"}}
-  \item{nsamp}{the number of objects that should be considered. If "all" then an exaustive scanning is performed}
-  \item{nmax}{maximum fraction (in the range (0,1]) of objects to consider in case \code{nsamp} is not equal to \code{all}. If \code{1} means the same as the exaustive scanning (\code{choose(NROW(x), NCOL(x)+1)} for Simplicial and Ellipsoid Depth)}
-  \item{tol}{it is a tolerance parameter that should be fixed depending the precision of your machine. This is used to ensure that the points on the border of the objects are considered inside it}
-  \item{dimension}{this argument is used only when \code{method="ellipsoid"} and it is the square of the dimension of the ellipsoid to use. Defaulf is \code{NCOL(x)}}
-  \item{location}{ TOBEDONE}
-  \item{covariance}{ TOBEDONE}
+  \item{x}{numeric; vector, dataframe or matrix. If \code{x} is a \code{\link{circular}} vector, a circular version is used. Avoid ties by wiggling the data. The function only issues a warning for ties.}
+  \item{y}{numeric; vector, dataframe or matrix with the same number of columns as \code{x}, or \code{NULL}. If \code{NULL}, \code{x} is used}
+  \item{tau}{numeric; threshold value for the evaluation of the local depth. Use function \code{\link{quantile.localdepth}} to evaluate \code{tau} using a quantile of the size of the objects}
+  \item{use}{character; the statistic used to measure the size of the objects. Currently, for \code{method} equal to \code{"simplicial"} or \code{"ellipsoid"} allowed statistics are \code{"volume"} and \code{"diameter"}. For \code{method} equal to \code{"mahalanobis"} this parameter is not used and the only available statistic is pairwise Mahalanobis' distance}
+  \item{method}{character; the type of (local) depth to be evaluated}
+  \item{type}{character; how to evaluate membership. Only active for \code{method="simplicial"}. See details.}
+  \item{nsamp}{character or numeric; the number of objects that are considered. If \code{"all"}, the size of all \code{choose(NROW(x), NCOL(x)+1)} objects is evaluated. Otherwise, a simple random sample with replacement of size \code{nsamp} is performed from the set of all possible objects.}
+  \item{nmax}{numeric; maximum fraction (in the range (0,1]) of objects to be considered when \code{nsamp} is not equal to \code{all}. If \code{nmax=1} the number of searched objects can reach the number of possible objects (\code{choose(NROW(x), NCOL(x)+1)} for simplicial and ellipsoid depth)}
+  \item{tol}{numeric; tolerance parameter to be fixed depending on the machine precision. Used to decide membership of points located near to the boundary of the objects}
+  \item{dimension}{numeric; only used with \code{method="ellipsoid"}. It is the squared length of the ellipsoid semimajor axis. If \code{dimension} is \code{NULL}, it is set to \code{NCOL(x)}}
+  \item{location}{\code{NULL} or a numeric vector; the \code{NCOL(x)} means vector used in \code{method} equal to \code{"mahalanobis"}. If \code{NULL}, \code{apply(x, 2, mean)} is used}
+  \item{covariance}{\code{NULL} or a numeric matrix; the \code{NCOL(x)*NCOL(x)} covariance matrix used in \code{method} equal to \code{"mahalanobis"}. If \code{NULL}, \code{cov(x)} is used}
 }
+
 \details{
-  ~~ If necessary, more details than the description above ~~
-
+With \code{method="simplicial"} and \code{type="exact"}, membership of the points in simplices is evaluated; when \code{type="approx"}, an approximate membership function is used. See references below.
 }
-\value{
-  The function return an object of \code{\link{class}} \code{localdepth} with the following components:
 
-  \item{localdepth}{the Local Depth for the given \code{tau}}
-  \item{depth}{the Depth}
-  \item{max.localdepth}{it is just \code{max(localdepth)}}
-  \item{max.depth}{it is just \code{max(depth)}}
-  \item{num}{vector with two elements. The first is the number of objects used for the evaluation of the Depth the second is the number of objects used for the evaluation of the Local Depth}
-  \item{call}{match.call() result. Note that this is call from the internal function}
-  \item{tau}{the threshold}
-  \item{use}{the statistic used to measure the size of the objects}
-  \item{tol}{the tolerance}
-  \item{x}{as in input}
-  \item{y}{as in input}
-  \item{type}{as in input}
-  \item{nsamp}{as in input}
-  \item{method}{as in input}
+\value{
+  The function returns an object of \code{\link{class}} \code{localdepth} with the following components:
+
+  \item{localdepth}{vector of the local depth values for the given \code{tau}}
+  \item{depth}{vector of the depth values}
+  \item{max.localdepth}{\code{max(localdepth)}}
+  \item{max.depth}{\code{max(depth)}}
+  \item{num}{vector with two components. \code{num[1]} gives the number of objects used for the evaluation of the depth; \code{num[2]} is the number of objects used for the evaluation of the local depth}
+  \item{call}{match.call() result. Note that this is called from the internal function}
+  \item{tau}{value of the corresponding input parameter}
+  \item{use}{value of the corresponding input parameter}
+  \item{tol}{value of the corresponding input parameter}
+  \item{x}{value of the corresponding input parameter}
+  \item{y}{value of the corresponding input parameter}
+  \item{type}{value of the corresponding input parameter}
+  \item{nsamp}{value of the corresponding input parameter}
+  \item{method}{value of the corresponding input parameter}
 }
 
 \references{
-C. Agostinelli and M. Romanazzi (2007) Local depth of univariate distributions, Working paper, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia
+C. Agostinelli and M. Romanazzi (2007). Local depth of univariate distributions. Working paper n. 1/2007, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia.
 
-C. Agostinelli and M. Romanazzi (2008)  Local depth of multidimensional data, Working paper n. 3/2008, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia
+C. Agostinelli and M. Romanazzi (2008). Local depth of multidimensional data. Working paper n. 3/2008, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia.
 }
 
 \author{Claudio Agostinelli and Mario Romanazzi}

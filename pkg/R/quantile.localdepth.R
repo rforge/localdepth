@@ -3,14 +3,14 @@
 #	quantile.localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: November, 07, 2008
-#	Version: 0.1-2
+#	Date: December, 17, 2008
+#	Version: 0.1-4
 #
 #	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c('simplicial', 'ellipsoid', 'mahalanobis'), nsamp='all', size=FALSE, dimension=NULL, ...) {
+quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c('simplicial', 'ellipsoid', 'mahalanobis'), nsamp='all', size=FALSE, dimension=NULL, covariance=NULL, ...) {
   use <- match.arg(use)
   method <- match.arg(method)
 ## simplicial
@@ -22,7 +22,7 @@ quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
-      quantile.mahalanobis(x=x, probs=probs, all=size)
+      quantile.mahalanobis(x=x, probs=probs, nsamp=nsamp, all=size, covariance=covariance)
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")

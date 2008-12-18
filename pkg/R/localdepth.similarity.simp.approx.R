@@ -88,7 +88,7 @@ localdepth.similarity.simp.approx <- function(x, y=NULL, tau, use=c('volume', 'd
     result$depth <- z$depth/nt
     result$max.localdepth <- max(result$localdepth)
     result$max.depth <- max(result$depth)
-    result$num <- c(nt,nt)
+    result$num <- c(nt,NA)
   }
   result$call <- match.call()
   result$tau <- tau

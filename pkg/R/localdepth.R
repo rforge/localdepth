@@ -29,7 +29,7 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
-      localdepth.mahalanobis(x=x, y=y, tau=tau, location=location, covariance=covariance)
+      localdepth.mahalanobis(x=x, y=y, tau=tau, nsamp=nsamp, nmax=nmax, location=location, covariance=covariance)
 ## ellipsoid
   } else {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")
