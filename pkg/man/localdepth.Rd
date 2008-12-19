@@ -59,11 +59,53 @@ C. Agostinelli and M. Romanazzi (2008). Local depth of multidimensional data. Wo
 
 \seealso{\code{\link{quantile.localdepth}}, \code{\link{plot.localdepth}}}
 \examples{
+# Iris Setosa dataset
+data(iris)
+setosa <- iris[iris$Species=="setosa",-5]
+str(setosa)
+n <- dim(setosa)[1];p <- dim(setosa)[2]
+lab <- paste("U",1:n,sep="")
+pairs(setosa)
+# Wiggling data with gaussian error
+set.seed(1234)
+err <- matrix(c(rnorm(n,0,sd(setosa[,1])/1000),rnorm(n,0,sd(setosa[,2])/1000), rnorm(n,0,sd(setosa[,3])/1000),rnorm(n,0,sd(setosa[,4])/1000)),n,p,byrow=FALSE)
+setosa1 <- setosa + as.data.frame(err)
+qd <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="diameter", method="simplicial", nsamp="all", size=TRUE)
+c(mean(qd$stats),median(qd$stats)) #12.3, 11.7
+qv <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="volume", method="simplicial", nsamp="all",size=TRUE)
+c(mean(qv$stats),median(qv$stats)) #4.05, 2.03
+round(qd$quantile,2)
+round(qv$quantile,3)
+boxplot(qd$stats,qv$stats,names=c("Diameter","Volume"),xlab="Simplex Size", horizontal=TRUE,main="Iris Setosa")
+plot(qd$stats,qv$stats,xlab="Simplex Diameter",ylab="Simplex Volume", main="Iris Setosa",pch=20)
 
+# Simplicial global/local depth
 
+sldv10 <- localdepth(setosa1,tau=qv$quantile[10],use="volume", method="simplicial", type="exact", nsamp="all")  # requires a few minutes 
+str(sldv10)
+sd10 <- sldv10$depth       # simplicial depth
+sld10 <- sldv10$localdepth # simplicial local depth (volume, 10%)
+lab[sd10 == (p+1)/n]        # convex hull vertices (25 points out of 50)
+sdmax <- max(sd10);imax <- which.max(sd10);setosa[imax,] # deepest point
 
+# DD-Plot
 
+plot(sldv10, xlab="Simplicial Depth", ylab="Local Simplicial Depth", main="Iris Setosa",pch=20,ylim=c(0,1.02))
+abline(a=0,b=1,lty="dashed")
 
+# Mahalanobis Depth of Iris Versicolor wrt Iris Setosa
+
+iversicolor <- iris[iris$Species == "versicolor",-5]
+str(iversicolor)
+set.seed(2345)
+err <- matrix(c(rnorm(n,0,sd(iversicolor[,1])/1000),rnorm(n,0,sd(iversicolor[,2])/1000), rnorm(n,0,sd(iversicolor[,3])/1000),rnorm(n,0,sd(iversicolor[,4])/1000)), n,p,byrow=FALSE)
+iversicolor1 <- iversicolor + as.data.frame(err)
+qm <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), method="mahalanobis",nsamp="all",size=TRUE)
+round(qm$quantile,2)
+vers <- localdepth(x=setosa1, y=iversicolor1, tau=qm$quantile[10], method="mahalanobis", nsamp="all")
+str(vers)
+round(vers$depth,6)
+round(vers$localdepth,6) # identically zero
 }
 
 \keyword{multivariate}
