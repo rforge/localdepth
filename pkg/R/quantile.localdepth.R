@@ -3,18 +3,18 @@
 #	quantile.localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: December, 17, 2008
-#	Version: 0.1-4
+#	Date: March, 25, 2009
+#	Version: 0.1-5
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2009 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c('simplicial', 'ellipsoid', 'mahalanobis'), nsamp='all', size=FALSE, dimension=NULL, covariance=NULL, ...) {
+quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c('simplicial', 'ellipsoid', 'halfspace', 'mahalanobis'), nsamp='all', size=FALSE, dimension=NULL, covariance=NULL, ...) {
   use <- match.arg(use)
   method <- match.arg(method)
-## simplicial
-  if (method=='simplicial') {
+## simplicial and halfspace
+  if (method=='simplicial' or method=='halfspace') {
     if (is.circular(x))
       quantile.simp.circular(x=x, probs=probs, all=size)
     else

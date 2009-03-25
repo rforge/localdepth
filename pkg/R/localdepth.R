@@ -10,7 +10,7 @@
 #
 #############################################################
 
-localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9), dimension=NULL, location=NULL, covariance=NULL) {
+localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('simplicial', 'ellipsoid', 'halfspace', 'mahalanobis'), type=c('exact', 'approx'), nsamp='all', nmax=1, tol=10^(-9), dimension=NULL, location=NULL, covariance=NULL) {
   use <- match.arg(use)
   method <- match.arg(method)
   type <- match.arg(type)
@@ -31,9 +31,15 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
       localdepth.mahalanobis(x=x, y=y, tau=tau, nsamp=nsamp, nmax=nmax, location=location, covariance=covariance)
 ## ellipsoid
-  } else {
+  } else if (method=='ellipsoid')  {
       if (is.circular(x)) stop("method 'ellipsoid' is not implemented for circular data")
       localdepth.ellipsoid(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol, dimension=dimension)
+  } else {
+    if (is.circular(x)) stop("method 'halfspace' is not implemented for circular data")
+    if (type=='exact')
+      localdepth.halfspace(x=x, y=y, tau=tau, use=use)
+    else
+      stop("method 'halfspace' is not implemented for approximated calculation")
   }
 }
 
