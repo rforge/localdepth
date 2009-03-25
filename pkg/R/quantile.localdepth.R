@@ -14,7 +14,7 @@ quantile.localdepth <- function(x, probs, use=c('volume', 'diameter'),  method=c
   use <- match.arg(use)
   method <- match.arg(method)
 ## simplicial and halfspace
-  if (method=='simplicial' or method=='halfspace') {
+  if (method=='simplicial' | method=='halfspace') {
     if (is.circular(x))
       quantile.simp.circular(x=x, probs=probs, all=size)
     else
