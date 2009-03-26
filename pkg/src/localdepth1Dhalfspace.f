@@ -3,8 +3,8 @@ C
 C	Functions for the halfspace (local) depth
 C	Author: Claudio Agostinelli and Mario Romanazzi
 C	E-mail: claudio@unive.it
-C	Date: March, 25, 2009
-C	Version: 0.1
+C	Date: March, 26, 2009
+C	Version: 0.2
 C
 C	Copyright (C) 2009 Claudio Agostinelli and Mario Romanazzi
 C
@@ -38,7 +38,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
  10   continue
       do 20 ind1=1, nysize
         depthneg=0.0d00
-        ldepthned=0.0d00
+        ldepthneg=0.0d00
         depthpos=0.0d00
         ldepthpos=0.0d00
         do 30 ind2=1, nxsize
