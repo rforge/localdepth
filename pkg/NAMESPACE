@@ -10,6 +10,7 @@ localdepth.similarity,
 quantile.localdepth
 )
 
+
 #plot 
 S3method(plot, localdepth)
 
