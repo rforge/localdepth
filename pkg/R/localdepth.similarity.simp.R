@@ -3,10 +3,10 @@
 #	localdepth.similarity.simp function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: October, 02, 2008
-#	Version: 0.1-2
+#	Date: April, 02, 2009
+#	Version: 0.1-3
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2009 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
@@ -39,6 +39,7 @@ localdepth.similarity.simp <- function(x, y=NULL, tau, use=c('volume', 'diameter
   result$call <- match.call()
   result$tau <- tau
   result$use <- use
+  result$tol <- 0  
   result$x <- x
   result$y <- y
   result$type <- 'exact'

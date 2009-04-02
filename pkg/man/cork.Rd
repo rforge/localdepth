@@ -3,7 +3,7 @@
 \docType{data}
 \title{Cork dataset}
 \description{
-The cork dataset \citet{rao+1948} consists of weights of cork borings taken by the author (Rao, C.R.) from the north (N), east (E), south (S) and west (W) directions of the trunk for 28 trees in a block of plantations.
+The cork dataset (Rao, 1948) consists of weights of cork borings taken by the author (Rao, C.R.) from the north (N), east (E), south (S) and west (W) directions of the trunk for 28 trees in a block of plantations.
 }
 \usage{data(cork)}
 \format{
@@ -21,7 +21,6 @@ The cork dataset \citet{rao+1948} consists of weights of cork borings taken by t
 }
 
 \examples{
-data(cork)
-## maybe str(cork) ; plot(cork) ...
+  data(cork)
 }
 \keyword{datasets}

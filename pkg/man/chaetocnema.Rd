@@ -57,10 +57,10 @@ contour(x=gx, y=gy, z=matrix(depthcontours$depth/depthcontours$max.depth, nrow=l
 plot(chaetocnema, pch=as.character(lab), main='Approx Simplicial Depth')
 contour(x=gx, y=gy, z=matrix(depthcontoursapprox$depth/depthcontoursapprox$max.depth, nrow=length(gx), ncol=length(gy)), add=TRUE)
 
-plot(chaetocnema, pch=as.character(lab), main='Exact Simplicial Local Depth, Tau=20%')
+plot(chaetocnema, pch=as.character(lab), main='Exact Simplicial Local Depth, Tau=0.2')
 contour(x=gx, y=gy, z=matrix(depthcontours$localdepth/depthcontours$max.localdepth, nrow=length(gx), ncol=length(gy)), add=TRUE)
 
-plot(chaetocnema, pch=as.character(lab), main='Approx Simplicial Local Depth, Tau=20%')
+plot(chaetocnema, pch=as.character(lab), main='Approx Simplicial Local Depth, Tau=0.2')
 contour(x=gx, y=gy, z=matrix(depthcontoursapprox$localdepth/depthcontoursapprox$max.localdepth, nrow=length(gx), ncol=length(gy)), add=TRUE)
 }
 \keyword{datasets}

@@ -6,10 +6,9 @@ The function evaluates the size of the objects formed from a dataset according t
 }
 \usage{
 quantile.localdepth(x, probs, use = c("volume", "diameter"), 
-method = c("simplicial", "ellipsoid", "mahalanobis"), 
-nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, ...)
+method = c("simplicial", "ellipsoid", "halfspace", "mahalanobis"), 
+nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{numeric; vector, dataframe or matrix}
   \item{probs}{numeric; vector of probabilities with values in [0,1]. Quantile orders of the statistic}
@@ -19,7 +18,7 @@ nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, ...)
   \item{size}{logical; if \code{TRUE} the size of all possible objects is returned}
   \item{dimension}{numeric; only used with \code{method="ellipsoid"}. It is the squared length of the ellipsoid semimajor axis. If \code{dimension} is \code{NULL}, it is set to \code{NCOL(x)}}
   \item{covariance}{\code{NULL} or a numeric matrix; the \code{NCOL(x)*NCOL(x)} covariance matrix used in \code{method} equal to \code{"mahalanobis"}. If \code{NULL}, \code{cov(x)} is used}
-  \item{\dots}{arguments passed to the next method}
+  \item{\dots}{arguments passed to \code{\link{quantile.default}}}
 }
 
 \details{

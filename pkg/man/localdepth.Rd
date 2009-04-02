@@ -6,13 +6,13 @@ The function evaluates the depth and the local depth for a set of points with re
 }
 \usage{
 localdepth(x, y = NULL, tau, use = c("volume", "diameter"), 
-  method = c("simplicial", "ellipsoid", "mahalanobis"), 
+  method = c("simplicial", "ellipsoid", "halfspace", "mahalanobis"), 
   type = c("exact", "approx"), nsamp = "all", nmax = 1, 
   tol=10^(-9), dimension=NULL, location=NULL, covariance=NULL)
 }
 
 \arguments{
-  \item{x}{numeric; vector, dataframe or matrix. If \code{x} is a \code{\link{circular}} vector, a circular version is used. Avoid ties by wiggling the data. The function only issues a warning for ties.}
+  \item{x}{numeric; vector, dataframe or matrix. If \code{x} is a \code{circular} vector, a circular version is used. Avoid ties by wiggling the data. The function only issues a warning for ties}
   \item{y}{numeric; vector, dataframe or matrix with the same number of columns as \code{x}, or \code{NULL}. If \code{NULL}, \code{x} is used}
   \item{tau}{numeric; threshold value for the evaluation of the local depth. Use function \code{\link{quantile.localdepth}} to evaluate \code{tau} using a quantile of the size of the objects}
   \item{use}{character; the statistic used to measure the size of the objects. Currently, for \code{method} equal to \code{"simplicial"} or \code{"ellipsoid"} allowed statistics are \code{"volume"} and \code{"diameter"}. For \code{method} equal to \code{"mahalanobis"} this parameter is not used and the only available statistic is pairwise Mahalanobis' distance}

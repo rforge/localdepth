@@ -1,86 +1,68 @@
 \name{localdepth.similarity}
 \alias{localdepth.similarity}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+
+\title{Local depth similarity}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The function evaluates the depth similarity and the local depth similarity for a set of points with respect to a dataset. 
 }
 \usage{
-localdepth.similarity(x, y = NULL, tau, use = c("volume", "diameter"), method = c("simplicial", "ellipsoid", "mahalanobis"), type = c("exact", "approx"), nsamp = "all", nmax = 1, tol = 10^(-9), location = NULL, covariance = NULL, weight = NULL)
+localdepth.similarity(x, y = NULL, tau, use = c("volume", "diameter"), method = c("simplicial", "ellipsoid", "mahalanobis"), type = c("exact", "approx"), nsamp = "all", nmax = 1, tol = 10^(-9), dimension=NULL, location = NULL, covariance = NULL, weight = NULL)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{x}{ ~~Describe \code{x} here~~ }
-  \item{y}{ ~~Describe \code{y} here~~ }
-  \item{tau}{ ~~Describe \code{tau} here~~ }
-  \item{use}{ ~~Describe \code{use} here~~ }
-  \item{method}{ ~~Describe \code{method} here~~ }
-  \item{type}{ ~~Describe \code{type} here~~ }
-  \item{nsamp}{ ~~Describe \code{nsamp} here~~ }
-  \item{nmax}{ ~~Describe \code{nmax} here~~ }
-  \item{tol}{ ~~Describe \code{tol} here~~ }
-  \item{location}{ ~~Describe \code{location} here~~ }
-  \item{covariance}{ ~~Describe \code{covariance} here~~ }
-  \item{weight}{ ~~Describe \code{weight} here~~ }
+  \item{x}{numeric; vector, dataframe or matrix. If \code{x} is a \code{circular} vector, a circular version is used. Avoid ties by wiggling the data. The function only issues a warning for ties.}
+  \item{y}{numeric; vector, dataframe or matrix with the same number of columns as \code{x}, or \code{NULL}. If \code{NULL}, \code{x} is used}
+  \item{tau}{numeric; threshold value for the evaluation of the local depth. Use function \code{\link{quantile.localdepth}} to evaluate \code{tau} using a quantile of the size of the objects}
+  \item{use}{character; the statistic used to measure the size of the objects. Currently, for \code{method} equal to \code{"simplicial"} or \code{"ellipsoid"} allowed statistics are \code{"volume"} and \code{"diameter"}. For \code{method} equal to \code{"mahalanobis"} this parameter is not used and the only available statistic is pairwise Mahalanobis' distance}
+  \item{method}{character; the type of (local) depth similarity to be evaluated}
+  \item{type}{character; how to evaluate membership. Only active for \code{method="simplicial"}. See details.}
+  \item{nsamp}{character or numeric; the number of objects that are considered. If \code{"all"}, the size of all \code{choose(NROW(x), NCOL(x)+1)} objects is evaluated. Otherwise, a simple random sample with replacement of size \code{nsamp} is performed from the set of all possible objects.}
+  \item{nmax}{numeric; maximum fraction (in the range (0,1]) of objects to be considered when \code{nsamp} is not equal to \code{all}. If \code{nmax=1} the number of searched objects can reach the number of possible objects (\code{choose(NROW(x), NCOL(x)+1)} for simplicial and ellipsoid depth)}
+  \item{tol}{numeric; tolerance parameter to be fixed depending on the machine precision. Used to decide membership of points located near to the boundary of the objects}
+  \item{dimension}{numeric; only used with \code{method="ellipsoid"}. It is the squared length of the ellipsoid semimajor axis. If \code{dimension} is \code{NULL}, it is set to \code{NCOL(x)}}
+  \item{location}{\code{NULL} or a numeric vector; the \code{NCOL(x)} means vector used in \code{method} equal to \code{"mahalanobis"}. If \code{NULL}, \code{apply(x, 2, mean)} is used}
+  \item{covariance}{\code{NULL} or a numeric matrix; the \code{NCOL(x)*NCOL(x)} covariance matrix used in \code{method} equal to \code{"mahalanobis"}. If \code{NULL}, \code{cov(x)} is used}
+  \item{weight}{experimental parameter used to weights entries in the similarity matrix. Not implemented in each method, dimension.}
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+With \code{method="simplicial"} and \code{type="exact"}, membership of the points in simplices is evaluated; when \code{type="approx"}, an approximate membership function is used. See references below.
 }
+
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
-}
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+  The function returns an object of \code{\link{class}} \code{localdepth.similarity} with the following components:
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+  \item{localdepth}{matrix of the local depth similarities}
+  \item{depth}{matrix of the depth similarities}
+  \item{max.localdepth}{\code{max(localdepth)}}
+  \item{max.depth}{\code{max(depth)}}
+  \item{num}{vector with two components. \code{num[1]} gives the number of objects used for the evaluation of the depth similarity; \code{num[2]} is the number of objects used for the evaluation of the local depth similarity}
+  \item{call}{match.call() result. Note that this is called from the internal function}
+  \item{tau}{value of the corresponding input parameter}
+  \item{use}{value of the corresponding input parameter}
+  \item{tol}{value of the corresponding input parameter}
+  \item{x}{value of the corresponding input parameter}
+  \item{y}{value of the corresponding input parameter}
+  \item{type}{value of the corresponding input parameter}
+  \item{nsamp}{value of the corresponding input parameter}
+  \item{method}{value of the corresponding input parameter}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+
+\note{The function for Ellipsoid (local) depth similarity is not implemented yet.}
+
+\references{
+C. Agostinelli and M. Romanazzi (2007). Local depth of univariate distributions. Working paper n. 1/2007, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia.
+
+C. Agostinelli and M. Romanazzi (2008). Local depth of multidimensional data. Working paper n. 3/2008, Dipartimento di Statistica, Universita' Ca' Foscari, Venezia.
+}
+\author{Claudio Agostinelli and Mario Romanazzi}
+
+\seealso{\code{\link{localdepth}}}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (x, y = NULL, tau, use = c("volume", "diameter"), method = c("simplicial", 
-    "ellipsoid", "mahalanobis"), type = c("exact", "approx"), 
-    nsamp = "all", nmax = 1, tol = 10^(-9), location = NULL, 
-    covariance = NULL, weight = NULL) 
-{
-    use <- match.arg(use)
-    method <- match.arg(method)
-    type <- match.arg(type)
-    if (method == "simplicial") {
-        if (is.circular(x)) 
-            localdepth.similarity.simp.circular(x = x, y = y, 
-                tau = tau, use = use)
-        if (type == "exact") 
-            localdepth.similarity.simp(x = x, y = y, tau = tau, 
-                use = use, weight = weight)
-        else localdepth.similarity.simp.approx(x = x, y = y, 
-            tau = tau, use = use, nsamp = nsamp, nmax = nmax, 
-            tol = tol)
-    }
-    else if (method == "mahalanobis") {
-        if (is.circular(x)) 
-            stop("method 'mahalanobis' is not implemented for circular data")
-        localdepth.similarity.mahalanobis(x = x, y = y, tau = tau, 
-            nsamp = nsamp, nmax = nmax, location = location, 
-            covariance = covariance, weight = weight)
-    }
-    else {
-        if (is.circular(x)) 
-            stop("method 'ellipsoid' is not implemented for circular data")
-        localdepth.similarity.ellipsoid(x = x, y = y, tau = tau, 
-            use = use, nsamp = nsamp, nmax = nmax, tol = tol)
-    }
-  }
+
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+\keyword{multivariate}
+\keyword{nonparametric}
+\keyword{cluster}
