@@ -11,9 +11,9 @@
  \item{xlab}{a title for the x axis: see \code{\link{title}}}
  \item{ylab}{a title for the y axis: see \code{\link{title}}}
  \item{main}{an overall title for the plot: see \code{\link{title}}}
- \item{mark}{points with local depth or depth gretaer than mark are marked with their row indices in the dataset}
- \item{labels}{labels used to mark the points. it must have the same length as the number of rows of \code{x$y}}
- \item{\dots}{graphical parameters can be given as arguments.}
+ \item{mark}{points with local depth or depth greater than \code{mark} are shown with their row indices in the dataset}
+ \item{labels}{labels used to mark the points. It must have the same length as the number of rows of \code{x$y}}
+ \item{\dots}{graphical parameters can be given as arguments}
 }
 
 \description{
@@ -21,7 +21,7 @@
 }
 
 \value{
-  The function return the \code{x} object as \code{invisible}.
+  The function returns the \code{x} object as \code{invisible}.
 }
 
 \author{Claudio Agostinelli and Mario Romanazzi}

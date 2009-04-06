@@ -22,7 +22,7 @@ nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, \dots)
 }
 
 \details{
-When choosing between \code{nsamp='all'} or a numeric value for \code{nsamp} the value of \code{choose(NROW(x), NCOL(x)+1)} must be considered to avoid very long computing times. When the number of possible objects is greater than the maximum vector length manageable by the machine, an error is return by the system. In this case it is necessary to use the approximated procedure through the parameter \code{nsamp}
+When choosing between \code{nsamp='all'} or a numeric value for \code{nsamp} the value of \code{choose(NROW(x), NCOL(x)+1)} must be considered to avoid very long computing times. When the number of possible objects is greater than the maximum vector length manageable by the machine, an error is returned by the system. In this case it is necessary to use the approximated procedure through the parameter \code{nsamp}.
 }
 
 \value{

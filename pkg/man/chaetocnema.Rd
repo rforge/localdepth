@@ -3,11 +3,11 @@
 \docType{data}
 \title{Chaetocnema dataset}
 \description{
-The Chaetocnema dataset  are anatomical measures of 74 males of fleabeetles, of three different genera: Ch. Concinna (A, 21 cases), Ch. Heikertingeri (B, 31 cases) and Ch. Heptapotamica (C, 22 cases).
+The Chaetocnema dataset includes anatomical measures of 74 males of fleabeetles, of three different genera: Ch. Concinna (A, 21 cases), Ch. Heikertingeri (B, 31 cases) and Ch. Heptapotamica (C, 22 cases).
 }
 \usage{data(chaetocnema)}
 \format{
-  A data frame with 74 observations on the following 8 variables.
+Data frame with 74 observations on the following 8 variables.
   \describe{
     \item{\code{X10}}{width of the first joint of the first tarsus in microns (the sum of measurements for both tarsi)}
     \item{\code{X12}}{the same for the second joint}
@@ -15,8 +15,8 @@ The Chaetocnema dataset  are anatomical measures of 74 males of fleabeetles, of 
     \item{\code{X18}}{the front angle of the aedeagus (1 unit = 7.5 degrees)}
     \item{\code{X40}}{the maximal width of the head between teh external edges of the eyes in 0.01mm}
     \item{\code{X48}}{the aedeagus width from the side in microns}
-    \item{\code{specimen}}{specimens of the fleabeetles. A factor with levels \code{A}: Ch. Concinna, \code{B}: Ch. Heikertingeri, \code{C}: Ch. Heptapotamica}
-    \item{\code{source}}{sources of specimens. A factor with levels \code{A}: Environs of Uljianovsk, \code{B}: Khvalynsk, the Volga, \code{C}: Pern, \code{D}: Environs of Leningrad, \code{E}: the Ukraine, \code{F}: Ashkhabd, Turkmenistan, \code{G}: France, \code{H}: Ustj-Zilma, \code{I}: Gabra, Abkhazia, \code{L}: Ussuri district, \code{M}: Yakutsk district, \code{N}: Khabarovsk, \code{O}: Germany, \code{P}: Environs of Lake Issyk-Kul, Kirghizia, \code{Q}: Alma-ata, Kazachstan, \code{R}: Environs of Frunza, Kirghizia}
+    \item{\code{species}}{species of the fleabeetles. A factor with levels \code{A}: Ch. Concinna, \code{B}: Ch. Heikertingeri, \code{C}: Ch. Heptapotamica}
+    \item{\code{area}}{colletion area of specimens. A factor with levels \code{A}: Environs of Uljianovsk, \code{B}: Khvalynsk, the Volga, \code{C}: Pern, \code{D}: Environs of Leningrad, \code{E}: the Ukraine, \code{F}: Ashkhabd, Turkmenistan, \code{G}: France, \code{H}: Ustj-Zilma, \code{I}: Gabra, Abkhazia, \code{L}: Ussuri district, \code{M}: Yakutsk district, \code{N}: Khabarovsk, \code{O}: Germany, \code{P}: Environs of Lake Issyk-Kul, Kirghizia, \code{Q}: Alma-ata, Kazachstan, \code{R}: Environs of Frunza, Kirghizia}
   }
 }
 \details{
