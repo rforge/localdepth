@@ -38,7 +38,7 @@ void twoDdiam(double *x, double *y, int *nx, double *diameter) {
 
 /* 2D AREA */
 void twoDarea(double *x, double *y, int *nx, double *area) {
-  double dsum, d1, d2, d3;
+  double dsum, d1, d2, d3, dtemp;
   int ind1, i1, i2, i3; 
   ind1 = -1;
   for (i1 = 0 ; i1 < (*nx-2) ; i1++) {
@@ -49,7 +49,8 @@ void twoDarea(double *x, double *y, int *nx, double *area) {
         d2 = sqrt(R_pow((x[i2]-x[i3]), 2.0)+R_pow((y[i2]-y[i3]), 2.0));
         d3 = sqrt(R_pow((x[i1]-x[i3]), 2.0)+R_pow((y[i1]-y[i3]), 2.0));
         dsum = (d1+d2+d3)/2.0;
-        area[ind1] = sqrt(dsum*(dsum-d1)*(dsum-d2)*(dsum-d3));
+        dtemp = dsum*(dsum-d1)*(dsum-d2)*(dsum-d3);
+	area[ind1] = sqrt(fmax(0.0, dtemp));
       }
     }
   }
