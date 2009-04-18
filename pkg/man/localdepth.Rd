@@ -70,13 +70,26 @@ pairs(setosa)
 set.seed(1234)
 err <- matrix(c(rnorm(n,0,sd(setosa[,1])/1000),rnorm(n,0,sd(setosa[,2])/1000), rnorm(n,0,sd(setosa[,3])/1000),rnorm(n,0,sd(setosa[,4])/1000)),n,p,byrow=FALSE)
 setosa1 <- setosa + as.data.frame(err)
+
+\dontrun{
+## The following two lines may not run in your computer since all sizes are reported
 qd <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="diameter", method="simplicial", nsamp="all", size=TRUE)
-c(mean(qd$stats),median(qd$stats)) #12.3, 11.7
 qv <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="volume", method="simplicial", nsamp="all",size=TRUE)
-c(mean(qv$stats),median(qv$stats)) #4.05, 2.03
+}
+
+## Here we explore 10% of simplices (0.1*choose(50,4+1))
+qd <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="diameter", method="simplicial", nsamp=211876, size=TRUE)
+qv <- quantile.localdepth(setosa1, probs=c(seq(0.01,0.09,0.01),seq(0.1,0.9,0.1)), use="volume", method="simplicial", nsamp=211876,size=TRUE)
+
+c(mean(qd$stats),median(qd$stats))
+c(mean(qv$stats),median(qv$stats))
+
 round(qd$quantile,2)
-round(qv$quantile,3)
-boxplot(qd$stats,qv$stats,names=c("Diameter","Volume"),xlab="Simplex Size", horizontal=TRUE,main="Iris Setosa")
+round(qv$quantile,8)
+
+boxplot(qd$stats,names="Diameter",xlab="Simplex Size", horizontal=TRUE,main="Iris Setosa")
+boxplot(qv$stats,names="Volume",xlab="Simplex Size", horizontal=TRUE,main="Iris Setosa")
+
 plot(qd$stats,qv$stats,xlab="Simplex Diameter",ylab="Simplex Volume", main="Iris Setosa",pch=20)
 
 # Simplicial global/local depth
