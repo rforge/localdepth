@@ -74,6 +74,7 @@ localdepth.simp.exact <- function(x, y=NULL, tau, use=c('volume', 'diameter'), n
   }
   result <- list()
   if (is.numeric(nsamp)) {
+    #### Sistemare la divisione per il numero di simplessi
     result$localdepth <- z$localdepth/z$nd
     result$depth <- z$depth/z$nd
     result$max.localdepth <- max(result$localdepth)
