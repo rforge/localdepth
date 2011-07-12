@@ -19,7 +19,7 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
   if (method=='simplicial') {
     if (is.circular(x))
       localdepth.simp.circular(x=x, y=y, tau=tau, use=use)
-    if (type=='exact') {
+    else if (type=='exact') {
       if (NCOL(x) < 3 & nsamp=='all') 
         localdepth.simp(x=x, y=y, tau=tau, use=use)
       else
