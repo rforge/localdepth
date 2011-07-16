@@ -3,10 +3,10 @@
 #	localdepth function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: December, 3, 2008
-#	Version: 0.2
+#	Date: July, 16, 2011
+#	Version: 0.3
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
@@ -26,6 +26,14 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
         localdepth.simp.exact(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
     } else
       localdepth.simp.approx(x=x, y=y, tau=tau, use=use, nsamp=nsamp, nmax=nmax, tol=tol)
+## halfspace    
+  } else if (method=='halfspace') {
+      if (is.circular(x))
+        localdepth.tukey.circular(x=x, y=y, tau=tau)
+      else if (NCOL(x)==1) 
+        localdepth1Dhalfspace(x=x, y=y, tau=tau) 
+      else
+        stop("method 'halfspace' is not implemented for non unidimensional cases")
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
