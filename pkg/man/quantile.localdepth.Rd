@@ -10,7 +10,7 @@ method = c("simplicial", "ellipsoid", "halfspace", "mahalanobis"),
 nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, \dots)
 }
 \arguments{
-  \item{x}{numeric; vector, dataframe or matrix}
+  \item{x}{numeric; vector, dataframe or matrix. If \code{x} is a \code{circular} vector, a circular version is used}
   \item{probs}{numeric; vector of probabilities with values in [0,1]. Quantile orders of the statistic}
   \item{use}{character; the statistic used to measure the size of the objects. For \code{method} equal to \code{"simplicial"} or \code{"ellipsoid"} allowed statistics are \code{"volume"} and \code{"diameter"}. For \code{method} equal to \code{"mahalanobis"} this parameter is not used and the only available statistic is pairwise Mahalanobis' distance}
   \item{method}{character; the type of (local) depth to be evaluated}
