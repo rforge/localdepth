@@ -29,7 +29,7 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
 ## halfspace    
   } else if (method=='halfspace') {
       if (is.circular(x))
-        localdepth.tukey.circular(x=x, y=y, tau=tau)
+        localdepth.tukey.circular(x=x, y=y, tau=tau, tol=tol)
       else if (NCOL(x)==1) 
         localdepth1Dhalfspace(x=x, y=y, tau=tau) 
       else

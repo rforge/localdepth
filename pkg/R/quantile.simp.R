@@ -3,14 +3,14 @@
 #	quantile.simp function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: July, 15, 2008
-#	Version: 0.5
+#	Date: July, 19, 2011
+#	Version: 0.5-1
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-quantile.simp <- function(x, probs, use=c('volume', 'diameter'), nsamp='all', all=FALSE) {
+quantile.simp <- function(x, probs, use=c('volume', 'diameter'), nsamp='all', all=FALSE, ...) {
   use <- match.arg(use)
 ##  norm <- function(x) sqrt(t(x)%*%x)
 ##  area <- function(x) sqrt(sum(x)*(sum(x)/2-x[1])*(sum(x)/2-x[2])*(sum(x)/2-x[3])/2)
@@ -94,7 +94,7 @@ quantile.simp <- function(x, probs, use=c('volume', 'diameter'), nsamp='all', al
                DUP = FALSE, NAOK = FALSE, PACKAGE = "localdepth")$result
     }
   }
-  res <- quantile.default(result, probs)
+  res <- quantile.default(result, probs, ...)
   if (all) {
      res <- list(quantile=res, stats=result, call=match.call())
   }

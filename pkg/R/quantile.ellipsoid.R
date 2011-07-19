@@ -3,14 +3,14 @@
 #	quantile.ellipsoid function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: September, 15, 2008
-#	Version: 0.1-2
+#	Date: July, 19, 2011
+#	Version: 0.1-3
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
-quantile.ellipsoid <- function(x, probs, use=c('volume', 'diameter'), nsamp='all', all=FALSE, dimension=NULL) {
+quantile.ellipsoid <- function(x, probs, use=c('volume', 'diameter'), nsamp='all', all=FALSE, dimension=NULL, ...) {
   use <- match.arg(use)
   if (is.vector(x))
     x <- matrix(x, ncol=1)  
@@ -77,7 +77,7 @@ quantile.ellipsoid <- function(x, probs, use=c('volume', 'diameter'), nsamp='all
                    PACKAGE = "localdepth")$result
         }
   }
-  res <- quantile.default(result, probs)
+  res <- quantile.default(result, probs, ...)
   if (all) {
      res <- list(quantile=res, stats=result, call=match.call())
   }
