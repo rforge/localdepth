@@ -6,6 +6,7 @@ useDynLib(localdepth)
 # functions
 export(
 localdepth,
+localdepth.simp.exact.hyperspheres,
 localdepth.similarity,
 ####localdepth.simp.approx.clust,
 quantile.localdepth
