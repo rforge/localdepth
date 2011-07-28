@@ -1,16 +1,16 @@
 C############################################################
 C
-C	Functions for the simplicial (local) depth
+C	Functions for the simplicial (local) depth in hyperspheres
 C	Author: Claudio Agostinelli and Mario Romanazzi
 C	E-mail: claudio@unive.it
 C	Date: July, 28, 2011
-C	Version: 0.2
+C	Version: 0.1
 C
 C	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 
-      SUBROUTINE ldse(X, Y, dtau, nc, nt, nrx, nry, nuse, dtol,
+      SUBROUTINE ldsehs(X, Y, dtau, nc, nt, nrx, nry, nuse, dtol,
      & depth, depthlocal)
 
       implicit double precision(a-h,o-z)
@@ -21,9 +21,9 @@ C############################################################
       dimension depth(nry), depthlocal(nry), y(nry,nc), x(nrx, nc)
       dimension isimplex(nc+1), xsimplex(nc+1, nc), depthsim(nry)
 
-      external ldsei
-      external ldarea
-      external lddiam
+      external ldseihs
+      external ldareahs
+      external lddiamhs
 
       dc = nc
 
@@ -60,13 +60,13 @@ CC          write(*,*) isimplex
  50       continue
 CC calculate the dimension of the simplex
           if (nuse.eq.0) then
-            call lddiam(xsimplex, nc, ddim)   
+            call lddiamhs(xsimplex, nc, ddim)   
           else
-            call ldarea(xsimplex, nc, ddim)   
+            call ldareahs(xsimplex, nc, ddim)   
           endif
 
 CC calculate the depth
-          call ldsei(xsimplex, y, nc, nry, dtol, 
+          call ldseihs(xsimplex, y, nc, nry, dtol, 
      &      depthsim)
           do 70 kk=1,nry
             depth(kk) = depth(kk)+depthsim(kk)
@@ -93,9 +93,8 @@ CC      write(*,*) nsimp
       return
       end
 
-
-      SUBROUTINE ldsea(X, Y, dtau, nc, nt, nsamp, nrx, nry, nuse, dtol,
-     & depth, depthlocal, dd, dld)
+      SUBROUTINE ldseahs(X, Y, dtau, nc, nt, nsamp, nrx, nry, nuse,
+     & dtol, depth, depthlocal, dd, dld)
 
       implicit double precision(a-h,o-z)
       implicit integer (n,i,j,k)
@@ -105,9 +104,9 @@ CC      write(*,*) nsimp
       dimension depth(nry), depthlocal(nry), y(nry,nc), x(nrx, nc)
       dimension isimplex(nrx), xsimplex(nc+1, nc), depthsim(nry)
 
-      external ldsei
-      external ldarea
-      external lddiam
+      external ldseihs
+      external ldareahs
+      external lddiamhs
       external rndstart
       external rndend
       external rndunif
@@ -146,13 +145,13 @@ CC          write(*,*) isimplex
 
 CC calculate the dimension of the simplex
         if (nuse.eq.0) then
-          call lddiam(xsimplex, nc, ddim)
+          call lddiamhs(xsimplex, nc, ddim)
         else
-          call ldarea(xsimplex, nc, ddim)   
+          call ldareahs(xsimplex, nc, ddim)   
         endif
 
 CC calculate the depth
-        call ldsei(xsimplex, y, nc, nry, dtol,
+        call ldseihs(xsimplex, y, nc, nry, dtol,
      &    depthsim)
         do 70 kk=1,nry
           depth(kk) = depth(kk)+depthsim(kk)
@@ -186,7 +185,7 @@ CCC      write(*,*) dd
       end
 
 CC calculate the depth for a single simplex
-      SUBROUTINE ldsei(X, Y, nc, nry, dtol, depth)
+      SUBROUTINE ldseihs(X, Y, nc, nry, dtol, depth)
 
       implicit double precision(a-h,o-z)
       implicit integer (n,i,j,k)
@@ -199,12 +198,13 @@ CC calculate the depth for a single simplex
       dimension depth(nry), y(nry,nc), x(nc+1, nc), xuno(nc, nc)
       dimension xdue(nc, nry), xtre(nc, nry)
       dimension ipvt(nc), ztemp(nc), dwork(nc), ddeth(2)
+      dimension dalpha(nc-1)
 
       external dgeco
       external dgedi
       external dgemm
 
-      dc = nc      
+      dc = nc
 
       do 10 i=1,nc
         do 20 j=1,nc
@@ -232,17 +232,30 @@ CC ora xtre contiene i coefficienti
         dsum=dzero
         do 60 j=1,nc
           dsum=dsum+xtre(j,i)
-          if (xtre(j,i).le.-dtol) then
-            no=1
-          endif
-          if (xtre(j,i).ge.duno+dtol) then
-            no=1
-          endif
  60     continue
+        dalpha0=1/dsum
+        do 62 j=1,(nc-1)
+          dalpha(j)=xtre(j,i)*dalpha0
+ 62     continue
+        dsum=dzero
+        do 64 j=1,(nc-1)
+          dsum=dsum+dalpha(j)
+          if (dalpha(j).le.-dtol) then
+            no=1
+          endif
+          if (dalpha(j).ge.duno+dtol) then
+            no=1
+          endif
+ 64    continue
+          if (dalpha0.le.-dtol) then
+            no=1
+          endif
+          if (dalpha0.ge.duno+dtol) then
+            no=1
+          endif
           if (dsum.le.(duno+dtol).and.no.eq.0) then
             depth(i) = duno
           endif
  50   continue
       return
       end
-
