@@ -24,7 +24,7 @@ localdepth.simp.exact.hyperspheres <- function(x, y=NULL, tau, use=c('volume', '
   nx <- nrow(x)
   ny <- nrow(y)
   nc <- ncol(x)
-  nt <- choose(nx, nc+1)
+  nt <- choose(nx, nc)
   if (nt > .Machine$integer.max)
     nt <- .Machine$integer.max
 
