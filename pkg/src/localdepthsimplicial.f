@@ -3,8 +3,8 @@ C
 C	Functions for the simplicial (local) depth
 C	Author: Claudio Agostinelli and Mario Romanazzi
 C	E-mail: claudio@unive.it
-C	Date: July, 28, 2011
-C	Version: 0.2
+C	Date: September, 01, 2011
+C	Version: 0.3
 C
 C	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 C
@@ -232,10 +232,10 @@ CC ora xtre contiene i coefficienti
         dsum=dzero
         do 60 j=1,nc
           dsum=dsum+xtre(j,i)
-          if (xtre(j,i).le.-dtol) then
+          if (xtre(j,i).lt.-dtol) then
             no=1
           endif
-          if (xtre(j,i).ge.duno+dtol) then
+          if (xtre(j,i).gt.duno+dtol) then
             no=1
           endif
  60     continue
