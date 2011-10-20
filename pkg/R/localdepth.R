@@ -30,10 +30,8 @@ localdepth <- function(x, y=NULL, tau, use=c('volume', 'diameter'), method=c('si
   } else if (method=='halfspace') {
       if (is.circular(x))
         localdepth.tukey.circular(x=x, y=y, tau=tau, tol=tol)
-      else if (NCOL(x)==1) 
-        localdepth1Dhalfspace(x=x, y=y, tau=tau) 
-      else
-        stop("method 'halfspace' is not implemented for non unidimensional cases")
+      else 
+        localdepth.halfspace(x=x, y=y, tau=tau) 
 ## mahalanobis    
   } else if (method=='mahalanobis') {
       if (is.circular(x)) stop("method 'mahalanobis' is not implemented for circular data")
