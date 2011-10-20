@@ -250,10 +250,10 @@ CC ora xuno contiene la matrice inversa, il determinante non e' calcolato
           call dgemv('N',nc,nc,duno,xunobis,nc,
      &      xdue,1,dzero,xtre,1)
 CC ora xtre contiene i coefficienti
-CC        write(*,*) 'rcond=', rcond
-CC        write(*,*) 'det=', ddeth(1) * 10.0**ddeth(2)
-CC        write(*,*) 'coeff, beta, gamma, alpha'
-CC        write(*,*) xtre
+CC          write(*,*) 'rcond=', rcond
+CC          write(*,*) 'det=', ddeth(1) * 10.0**ddeth(2)
+CC          write(*,*) 'coeff, beta, gamma, alpha'
+CC          write(*,*) xtre
           no=0
           dsum=dzero
           do 50 j=1,(nc-1)
@@ -271,7 +271,7 @@ CC        write(*,*) xtre
           if (xtre(nc).gt.duno+dtol) then
             no=1
           endif
-CC        write(*,*) 'somma =', dsum
+CC          write(*,*) 'somma =', dsum
           if (dsum.le.(duno+dtol).and.no.eq.0) then
             depth(i) = duno
           endif
