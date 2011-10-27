@@ -18,6 +18,8 @@ quantile.hyperspheres <- function(x, probs, use=c('volume', 'diameter'), nsamp='
   nx <- nrow(x)
   nc <- ncol(x)
   if (nx < nc) stop('x must have at least', nc, 'rows')
+  if (use=='volume' & nc!=3)
+    stop("The option use='volume' is available only on the sphere")  
   if (is.character(nsamp)) {
     if (nsamp=='all') {
       nt <- choose(nx, nc)
