@@ -81,6 +81,7 @@ quantile.ellipsoid <- function(x, probs, use=c('volume', 'diameter'), nsamp='all
   if (all) {
      res <- list(quantile=res, stats=result, call=match.call())
   }
+  class(res) <- 'quantile.localdepth'
   return(res)
 }
 

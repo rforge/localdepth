@@ -30,6 +30,7 @@ quantile.simp.circular <- function(x, probs, all=FALSE, ...) {
     diameters <- conversion.circular(circular(diameters), xcp$units, xcp$type, xcp$template, xcp$modulo, xcp$zero, xcp$rotation)
      res <- list(quantile=res, stats=diameters, call=match.call())
   }
+  class(res) <- 'quantile.localdepth'
   return(res)
 }
 
