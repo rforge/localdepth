@@ -3,15 +3,14 @@
 #	localdepth.simp.exact.hyperspheres function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: July, 28, 2011
-#	Version: 0.1
+#	Date: October, 26, 2011
+#	Version: 0.2
 #
 #	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
 localdepth.simp.exact.hyperspheres <- function(x, y=NULL, tau, use=c('volume', 'diameter'), nsamp='all', nmax=1, tol=0) {
-  warning("x and y must be points in a unitary hyperspheres. Volume and diameter are evaluated on the corresponding euclidean simplex. Please fix me as soon as possible, here and in the quantile.localdepth functioin!")
   if (is.null(y))
     y <- x
   if (is.vector(x))
@@ -19,17 +18,21 @@ localdepth.simp.exact.hyperspheres <- function(x, y=NULL, tau, use=c('volume', '
   if (is.vector(y))
     y <- matrix(y, ncol=1)
   x <- as.matrix(x)
-  y <- as.matrix(y)
-  
+  y <- as.matrix(y)  
+  normalize <- function(x) x/sqrt(x%*%x)
+  x <- t(apply(x, 1, normalize))
+  y <- t(apply(y, 1, normalize))
   nx <- nrow(x)
   ny <- nrow(y)
   nc <- ncol(x)
+  if (ncol(y)!=nc)
+    stop("the number of columns in 'x' and 'y' must be the same")
   nt <- choose(nx, nc)
   if (nt > .Machine$integer.max)
     nt <- .Machine$integer.max
-
   use <- match.arg(use)
-
+  if (use=='volume' & nc!=3)
+    stop("The option use='volume' is available only on the sphere")
   if (is.numeric(nsamp) && nsamp <= 0) stop("the argument 'nsamp' must be positive")
   if (is.numeric(nsamp) && nsamp > nt) {
       warning("Since 'nsamp' is greater than the number of simplex the 'all' method is used")
