@@ -2,10 +2,10 @@ Title: Local Depth
 LazyLoad: yes
 LazyData: yes
 Package: localdepth
-Version: 0.5-4
+Version: 0.5-5
 Author: Claudio Agostinelli <claudio@unive.it> and Mario Romanazzi <romanaz@unive.it>
 Maintainer: Claudio Agostinelli <claudio@unive.it>
 Depends: circular
-Date: April 18, 2009. 
+Date: November 16, 2011. 
 Description: Simplicial, Mahalanobis and Ellipsoid Local and Global Depth
 License: GPL-2

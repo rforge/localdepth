@@ -8,6 +8,7 @@ export(
 localdepth,
 localdepth.simp.exact.hyperspheres,
 localdepth.similarity,
+localdepth1Dfprime,
 ####localdepth.simp.approx.clust,
 quantile.localdepth,
 quantile.hyperspheres
