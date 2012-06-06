@@ -6,7 +6,7 @@
 #	Date: November, 16, 2011
 #	Version: 0.1
 #
-#	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2011 Claudio Agostinelli, Juan Francisco Rosco Nieves and Mario Romanazzi
 #
 #############################################################
 
