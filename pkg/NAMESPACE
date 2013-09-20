@@ -11,7 +11,8 @@ localdepth.similarity,
 localdepth1Dfprime,
 ####localdepth.simp.approx.clust,
 quantile.localdepth,
-quantile.hyperspheres
+quantile.hyperspheres,
+depth2Dsigma
 )
 
 
