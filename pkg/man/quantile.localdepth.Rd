@@ -5,8 +5,9 @@
 The function evaluates the size of the objects formed from a dataset according to a statistic and returns the corresponding quantiles. Depending on the method the objects are simplices or ellipsoids.
 }
 \usage{
-quantile.localdepth(x, probs, use = c("volume", "diameter"), 
-method = c("simplicial", "ellipsoid", "halfspace", "mahalanobis"), 
+\method{quantile}{localdepth}(x, probs, use = c("volume", "diameter"), 
+method = c("simplicial", "ellipsoid", "halfspace",
+ "mahalanobis", "hyperspheresimplicial"), 
 nsamp = "all", size = FALSE, dimension = NULL, covariance=NULL, \dots)
 }
 \arguments{
