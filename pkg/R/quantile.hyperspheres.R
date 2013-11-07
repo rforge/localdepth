@@ -3,10 +3,10 @@
 #	quantile.hyperspheres function
 #	Author: Claudio Agostinelli and Mario Romanazzi
 #	E-mail: claudio@unive.it
-#	Date: October, 27, 2011
-#	Version: 0.1
+#	Date: August, 26, 2013
+#	Version: 0.1-1
 #
-#	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2013 Claudio Agostinelli and Mario Romanazzi
 #
 #############################################################
 
@@ -73,7 +73,7 @@ quantile.hyperspheres <- function(x, probs, use=c('volume', 'diameter'), nsamp='
                    PACKAGE = "localdepth")$result
         }
   }
-  res <- quantile.default(result, probs, ...)
+  res <- quantile(result, probs, ...)
   if (size) {
      res <- list(quantile=res, stats=result, call=match.call())
   }

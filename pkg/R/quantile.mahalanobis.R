@@ -33,7 +33,7 @@ quantile.mahalanobis <- function(x, probs, nsamp='all', all=FALSE, covariance=NU
       mah[k] <- sqrt(temp%*%Sinv%*%temp)
     }
   }
-  res <- quantile.default(mah, probs, ...)
+  res <- quantile(mah, probs, ...)
   if (all)
     res <- list(quantile=res, stats=mah, call=match.call())
   class(res) <- 'quantile.localdepth'

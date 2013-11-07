@@ -31,8 +31,10 @@ localdepth.simp.exact.hyperspheres <- function(x, y=NULL, tau, use=c('volume', '
   if (nt > .Machine$integer.max)
     nt <- .Machine$integer.max
   use <- match.arg(use)
-  if (use=='volume' & nc!=3)
-    stop("The option use='volume' is available only on the sphere")
+  if (use=='volume' & nc!=3) {
+    warning("The option use='volume' is available only on the sphere, we use 'diameter' instead")
+    use <- "diameter"
+  }
   if (is.numeric(nsamp) && nsamp <= 0) stop("the argument 'nsamp' must be positive")
   if (is.numeric(nsamp) && nsamp > nt) {
       warning("Since 'nsamp' is greater than the number of simplex the 'all' method is used")
