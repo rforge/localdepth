@@ -1,78 +1,40 @@
-  #############################################################
+#############################################################
 #
-#	localdepth2Dlinear function
-#	Author: Claudio Agostinelli and Mario Romanazzi
+#	depth2Dsimplicialsimilarity function
+#	Author: Claudio Agostinelli
 #	E-mail: claudio@unive.it
-#	Date: November, 20, 2008
+#	Date: February, 20, 2014
 #	Version: 0.1
 #
-#	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+#	Copyright (C) 2014 Claudio Agostinelli
 #
 #############################################################
 
-localdepth2Dlinearsimilarity <- function(x, y=NULL, tau, nsamp='all', nmax=1) {
-  if (is.null(y))
-    y <- x
-  if (is.vector(x))
-    x <- matrix(x, ncol=1)
-  if (is.vector(y))
-    y <- matrix(y, ncol=1)
+depth2Dsimplicialsimilarity <- function(x, y) {
   x <- as.matrix(x)
   y <- as.matrix(y)
-  nrx <- nrow(x)
-  if (nrx < 3) stop('x must have at least', 3, 'rows')  
-  nry <- nrow(y)
+  nx <- nrow(x)
+  ny <- nrow(y)
   result <- list()
-  localdepth <- matrix(0,nry,nry)
-  nt <- choose(nrx, 3)
-  if (nt > .Machine$integer.max/3)
-    nt <- .Machine$integer.max/3
-  nt <- nt*nmax
-  if (is.numeric(nsamp) && nsamp <= 0) stop("the argument 'nsamp' must be positive")
-  if (is.numeric(nsamp) && nsamp > nt) {
-      warning("Since 'nsamp' is greater than the number of simplex the 'all' method is used")
-      nsamp <- 'all'
-  }
 
-  if (is.character(nsamp) && nsamp=='all') {  
-    z <- .Fortran("lldals2D",
-      as.matrix(x),
-      as.matrix(y),
-      as.integer(nrx),
-      as.integer(nry),
-      as.double(tau),
-      as.integer(nsamp),
-      as.integer(nt),
-      dsamp = double(1),
-      dtot  = double(1),
-      localdepth = mat.or.vec(nry,nry),
-      PACKAGE = "localdepth")
-  } else {
-    z <- .Fortran("lldmcs2D",
-      as.matrix(x),
-      as.matrix(y),
-      as.integer(nrx),
-      as.integer(nry),
-      as.double(tau),
-      as.integer(nsamp),
-      as.integer(nt),
-      dsamp = double(1),
-      dtot  = double(1),
-      localdepth = mat.or.vec(nry,nry),
-      PACKAGE = "localdepth")
-  }
-
-  result$localdepth <- z$localdepth/z$dtot
-  result$max.localdepth <- max(result$localdepth)
-  result$num <- c(z$dtot,z$dsamp)    
+  ## numero di terne
+  nt <- choose(nx, 3)
+  depth <- rep(0, ny*nt)
+  res <- .C("d2Dsimpsim",
+            x1 = as.double(x[,1]),
+            x2 = as.double(x[,2]),
+            y1 = as.double(y[,1]),
+            y2 = as.double(y[,2]),
+            nx = as.integer(nx),
+            ny = as.integer(ny),
+            nt = as.integer(nt),
+            depth = as.double(depth),
+            DUP = TRUE, NAOK = FALSE, PACKAGE = "localdepth")
+  res$depth <- matrix(res$depth, nrow=ny, ncol=nt, byrow=FALSE)
+  res$depth <- res$depth%*%t(res$depth)
+  result$depth <- res$depth
   result$call <- match.call()
-  result$tau <- tau
-  result$x <- x
-  result$y <- y
-  result$type <- 'exact'
-  result$nsamp <- nsamp
-  result$method <- 'linear'
+  result$num <- nt
   class(result) <- 'localdepth.similarity'
   return(result)
 }
-
