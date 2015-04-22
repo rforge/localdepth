@@ -8,7 +8,12 @@ importFrom(stats, quantile)
 # functions
 export(
 localdepth,
+localdepth1,
+localdepth2,
 localdepth.similarity,
+depth.similarity,
+depth.knn,
+depth.kdd,
 ####localdepth1Dfprime,
 ####localdepth.simp.approx.clust,
 quantile.localdepth
