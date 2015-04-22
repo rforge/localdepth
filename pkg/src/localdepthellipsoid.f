@@ -1,12 +1,12 @@
 C############################################################
 C
-C	Functions for the exact ellipsoid (local) depth
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: September, 14, 2008
-C	Version: 0.1-1
+C    Functions for the exact ellipsoid (local) depth
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: September, 14, 2008
+C    Version: 0.1-1
 C
-C	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 
@@ -25,6 +25,9 @@ CC dduse e' la dimensione dell'elissoide al quadrato
       external ldei
       external elarea
       external eldiam
+
+CC NOT USED YET!
+      dt=nt
 
       do 5 i=1,nry
         depth(i) = dzero 
@@ -133,7 +136,7 @@ CCC          write(*,*) nsamp
 CC Evaluate the depth for a given simplex
 CC          write(*,*) isimplex
         do 50 ii=1,(nc+1)
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc
@@ -202,7 +205,7 @@ CC      write(*,*) dcov
 
 CC calcola inversa della matrice di var/cov
       call dgeco(dcov,nc,nc,ipvt,rcond,ztemp)
-      call dgedi(dcov,nc,nc,ipvt,ddeth,dwork,01)	
+      call dgedi(dcov,nc,nc,ipvt,ddeth,dwork,01)
 CC ora dcov contiene la matrice inversa, il determinante non e' calcolato
  
 CC      write(*,*) dcov

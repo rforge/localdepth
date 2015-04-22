@@ -3,19 +3,19 @@
 
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C	ld1ds function
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: August, 14, 2007
-C	Version: 0.2
+C    ld1ds function
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: August, 14, 2007
+C    Version: 0.2
 C
-C	Copyright (C) 2007 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2007 Claudio Agostinelli and Mario Romanazzi
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C    This program is free software; you can redistribute it and/or modify
 C    it under the terms of the GNU General Public License as published by
 C    the Free Software Foundation; version 2 of the License.
 C
-C   This program is distributed in the hope that it will be useful,
+C    This program is distributed in the hope that it will be useful,
 C    but WITHOUT ANY WARRANTY; without even the implied warranty of
 C    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 C    GNU General Public License for more details.
@@ -73,13 +73,13 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C	ld1dsall function
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: August, 10, 2007
-C	Version: 0.1
+C    ld1dsall function
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: August, 10, 2007
+C    Version: 0.1
 C
-C	Copyright (C) 2007 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2007 Claudio Agostinelli and Mario Romanazzi
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C    This program is free software; you can redistribute it and/or modify
 C    it under the terms of the GNU General Public License as published by

@@ -36,6 +36,7 @@ C   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 C***END PROLOGUE  INITDS
       DOUBLE PRECISION OS(*)
 C***FIRST EXECUTABLE STATEMENT  INITDS
+      I = 0
       IF (NOS .LT. 1) CALL XERMSG ('SLATEC', 'INITDS',
      +   'Number of coefficients is less than 1', 2, 1)
 C

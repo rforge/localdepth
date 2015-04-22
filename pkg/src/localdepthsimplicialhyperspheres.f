@@ -1,12 +1,12 @@
 C############################################################
 C
-C	Functions for the simplicial (local) depth in hyperspheres
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: September, 01, 2011
-C	Version: 0.2
+C   Functions for the simplicial (local) depth in hyperspheres
+C   Author: Claudio Agostinelli and Mario Romanazzi
+C   E-mail: claudio@unive.it
+C   Date: September, 01, 2011
+C   Version: 0.2
 C
-C	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
+C   Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 
@@ -24,6 +24,9 @@ C############################################################
       external ldseihs
       external ldareahs
       external lddiamhs
+
+CC NOT USED YET!
+      dt=nt
 
       do 5 i=1,nry
         depth(i) = dzero 
@@ -136,7 +139,7 @@ CCC          write(*,*) nsamp
 CC Evaluate the depth for a given simplex
 CC          write(*,*) isimplex
         do 50 ii=1,nc
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc

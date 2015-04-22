@@ -1,12 +1,12 @@
 C############################################################
 C
-C	Functions for the simplicial (local) depth
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: September, 01, 2011
-C	Version: 0.3
+C    Functions for the simplicial (local) depth
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: September, 01, 2011
+C    Version: 0.3
 C
-C	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 
@@ -24,6 +24,9 @@ C############################################################
       external ldsei
       external ldarea
       external lddiam
+
+CC NOT USED YET!
+      dt=nt
 
       dc = nc
 
@@ -136,7 +139,7 @@ CCC          write(*,*) nsamp
 CC Evaluate the depth for a given simplex
 CC          write(*,*) isimplex
         do 50 ii=1,(nc+1)
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc
@@ -221,7 +224,7 @@ CC calculate the depth for a single simplex
       
 CC calcola inversa della xuno
       call dgeco(xuno,nc,nc,ipvt,rcond,ztemp)
-      call dgedi(xuno,nc,nc,ipvt,ddeth,dwork,01)	
+      call dgedi(xuno,nc,nc,ipvt,ddeth,dwork,01)
 CC ora xuno contiene la matrice inversa, il determinante non e' calcolato
       call dgemm('N','N',nc,nry,nc,duno,xuno,nc,
      & xdue,nc,dzero,xtre,nc)

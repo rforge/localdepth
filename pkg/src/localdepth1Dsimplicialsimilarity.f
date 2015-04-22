@@ -3,13 +3,13 @@
 
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C	ld1ds function
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: September, 2, 2008
-C	Version: 0.1
+C    ld1ds function
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: September, 2, 2008
+C    Version: 0.1
 C
-C	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C    This program is free software; you can redistribute it and/or modify
 C    it under the terms of the GNU General Public License as published by

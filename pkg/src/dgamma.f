@@ -94,7 +94,7 @@ C
 C COMPUTE GAMMA(X) FOR -XBND .LE. X .LE. XBND.  REDUCE INTERVAL AND FIND
 C GAMMA(1+Y) FOR 0.0 .LE. Y .LT. 1.0 FIRST OF ALL.
 C
-      N = X
+      N = int(X)
       IF (X.LT.0.D0) N = N - 1
       Y = X - N
       N = N - 1

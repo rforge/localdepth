@@ -74,7 +74,7 @@ CC End of Evaluate the diamter of a given simplex
           isimplex(i)=i
  10     continue
         do 50 ii=1,nc
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc

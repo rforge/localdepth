@@ -73,7 +73,7 @@ CC      write(*,*) nsimp
           isimplex(i)=i
  10     continue
         do 50 ii=1,(nc+1)
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc
@@ -114,7 +114,7 @@ CC      write(*,*) nsimp
  30   continue
 
       call dgeco(xx,(nc+1),(nc+1),ipvt,rcond,ztemp)
-      call dgedi(xx,(nc+1),(nc+1),ipvt,ddeth,dwork,10)	
+      call dgedi(xx,(nc+1),(nc+1),ipvt,ddeth,dwork,10)
 
       darea = dabs(ddeth(1)*(10.0d00**ddeth(2)))/dgamma(dc+duno)
 

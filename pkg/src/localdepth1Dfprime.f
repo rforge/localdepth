@@ -1,12 +1,12 @@
 C############################################################
 C
-C	Functions for the halfspace (local) depth
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: November, 24, 2011
-C	Version: 0.2
+C    Functions for the halfspace (local) depth
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: November, 24, 2011
+C    Version: 0.2
 C
-C	Copyright (C) 2011 Claudio Agostinelli, Juan Francisco Rosco Nieves and Mario Romanazzi
+C    Copyright (C) 2011 Claudio Agostinelli, Juan Francisco Rosco Nieves and Mario Romanazzi
 C
 C############################################################
 C    This program is free software; you can redistribute it and/or modify

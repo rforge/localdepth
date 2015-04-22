@@ -1,12 +1,12 @@
 C############################################################
 C
-C	Functions for the halfspace (local) depth
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: November, 16, 2011
-C	Version: 0.1
+C    Functions for the halfspace (local) depth
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: November, 16, 2011
+C    Version: 0.1
 C
-C	Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2011 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 C    This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,8 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
       implicit double precision(a-h,l,o-z)
       implicit integer (n,i,j)
+      double precision posdepth, poldepth
+      double precision negdepth, neldepth
 
       dimension ydata(nysize),xdata(nxsize)
       dimension posdepth(nysize), poldepth(nysize)

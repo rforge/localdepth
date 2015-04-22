@@ -1,13 +1,13 @@
 C############################################################
 C
-C	Functions for the approximation of simplicial (local) depth
-C       for the similarity matrix
-C	Author: Claudio Agostinelli and Mario Romanazzi
-C	E-mail: claudio@unive.it
-C	Date: August, 27, 2008
-C	Version: 0.1-1
+C    Functions for the approximation of simplicial (local) depth
+C    for the similarity matrix
+C    Author: Claudio Agostinelli and Mario Romanazzi
+C    E-mail: claudio@unive.it
+C    Date: August, 27, 2008
+C    Version: 0.1-1
 C
-C	Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
+C    Copyright (C) 2008 Claudio Agostinelli and Mario Romanazzi
 C
 C############################################################
 
@@ -28,6 +28,9 @@ C############################################################
       external ldarea
       external lddiam
       external diffvol
+
+CC NOT USED YET!
+      dt=nt
 
       dc = nc
       dapprox = dzero
@@ -163,7 +166,7 @@ CCC          write(*,*) nsamp
 CC Evaluate the depth for a given simplex
 CC          write(*,*) isimplex
         do 50 ii=1,(nc+1)
-          is = (nrx-ii) * rndunif()+1
+          is = int(real(nrx-ii) * rndunif())+1
           iis = isimplex(is)
           isimplex(is) = isimplex(nrx-ii+1)
           do 60 jj=1,nc
